@@ -540,6 +540,7 @@ static RetroOption<int> ppsspp_frameskip("ppsspp_frameskip", "Frameskip", { "Off
 static RetroOption<int> ppsspp_frameskiptype("ppsspp_frameskiptype", "Frameskip Type", { {"Number of frames", 0}, {"Percent of FPS", 1} });
 static RetroOption<int> ppsspp_internal_resolution("ppsspp_internal_resolution", "Internal Resolution (Restart)", 1, { "480x272", "960x544", "1440x816", "1920x1088", "2400x1360", "2880x1632", "3360x1904", "3840x2176", "4320x2448", "4800x2720" });
 static RetroOption<int> ppsspp_button_preference("ppsspp_button_preference", "Confirmation Button", { { "Cross", PSP_SYSTEMPARAM_BUTTON_CROSS }, { "Circle", PSP_SYSTEMPARAM_BUTTON_CIRCLE } });
+static RetroOption<bool> ppsspp_circular_stick_input("ppsspp_circular_stick_input", "Circular Stick Input", false);
 static RetroOption<bool> ppsspp_fast_memory("ppsspp_fast_memory", "Fast Memory (Speedhack)", true);
 static RetroOption<bool> ppsspp_block_transfer_gpu("ppsspp_block_transfer_gpu", "Block Transfer GPU", true);
 static RetroOption<int> ppsspp_inflight_frames("ppsspp_inflight_frames", "Buffered frames (Slower, less lag, restart)", { { "Up to 2", 2 }, { "Up to 1", 1 }, { "No buffer", 0 }, });
@@ -681,6 +682,7 @@ void retro_set_environment(retro_environment_t cb)
    vars.push_back(ppsspp_locked_cpu_speed.GetOptions());
    vars.push_back(ppsspp_language.GetOptions());
    vars.push_back(ppsspp_button_preference.GetOptions());
+   vars.push_back(ppsspp_circular_stick_input.GetOptions());
    vars.push_back(ppsspp_rendering_mode.GetOptions());
    vars.push_back(ppsspp_gpu_hardware_transform.GetOptions());
    vars.push_back(ppsspp_texture_anisotropic_filtering.GetOptions());
@@ -805,6 +807,7 @@ static void check_variables(CoreParameter &coreParam)
       return;
 
    ppsspp_button_preference.Update(&g_Config.iButtonPreference);
+   ppsspp_circular_stick_input.Update(&g_Config.bAnalogIsCircular);
    ppsspp_fast_memory.Update(&g_Config.bFastMemory);
    ppsspp_vertex_cache.Update(&g_Config.bVertexCache);
    ppsspp_gpu_hardware_transform.Update(&g_Config.bHardwareTransform);
